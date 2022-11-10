@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Task1</title>
+</head>
+<body>
+
+<div id="container">
+
+    <input id="add-item-btn" type="button" value="+">
+
+</div>
+
+<script>
+
+    let container = document.getElementById('container');
+    let body = document.getElementsByTagName('body')[0];
+    let button = document.getElementById('add-item-btn');
+    let event = function (evt) {
+        let new_div = document.createElement('div');
+        container.appendChild(new_div);
+
+        body.classList.add('bg');
+
+        let alertCall = document.createElement('p');
+        alertCall.classList.add('alert');
+        let alertText = document.createTextNode('Новый элемент "div" добавлен');
+        alertCall.appendChild(alertText);
+
+        let closeButton = document.createElement('button');
+        closeButton.setAttribute('id', 'closeButton');
+        closeButton.classList.add('button')
+        let buttonText = document.createTextNode('Закрыть');
+        closeButton.appendChild(buttonText);
+
+        alertCall.appendChild(closeButton);
+
+        container.appendChild(alertCall);
+
+        let timer = setTimeout(function () {
+                body.classList.remove('bg');
+                alertCall.remove();
+            },
+            5000);
+
+        let CloseButtonEvent = function (innerEvt) {
+            clearTimeout(timer);
+            body.classList.remove('bg');
+            alertCall.remove();
+        }
+        closeButton.addEventListener('click', CloseButtonEvent)
+    }
+    button.addEventListener('click', event);
+
+
+</script>
+</body>
+</html>
