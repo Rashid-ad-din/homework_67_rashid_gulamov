@@ -2,9 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Во все тяжкие</title>
 </head>
 <body>
 
+<script>
+    window.addEventListener('load', function () {
+        body = document.getElementsByTagName('body')[0];
+
+        let container = document.createElement('div');
+        container.classList.add('container')
+
+        body.appendChild(container);
+
+        fetch(url = 'https://www.breakingbadapi.com/api/characters', data = {
+            method: 'GET',
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let flexContainer = document.createElement('div');
+                    flexContainer.classList.add('flex');
+                    container.appendChild(flexContainer);
+
+                for (let person of data) {
+
+                    let ref = document.createElement('a');
+                    ref.setAttribute('href', 'character.html?id=' + person.char_id);
+                    flexContainer.appendChild(ref);
+
+
+                    let Card = document.createElement('div');
+                    Card.classList.add('cardCommon');
+                    ref.appendChild(Card);
+
+
+
+                    let cardImage = document.createElement('div');
+                    Card.appendChild(cardImage);
+
+                    let image = document.createElement('img');
+                    cardImage.appendChild(image);
+                    image.classList.add('image');
+                    image.setAttribute('src', person.img);
+
+
+                    let innerCard = document.createElement('div');
+                    innerCard.textContent = person.name;
+                    Card.appendChild(innerCard);
+
+
+                }
+                console.log(data);
+
+            });
+
+
+    });
+
+</script>
 </body>
 </html>

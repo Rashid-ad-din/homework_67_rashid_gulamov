@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Во все тяжкие</title>
+</head>
+<body>
+
+<script>
+    window.addEventListener('load', function () {
+        body = document.getElementsByTagName('body')[0];
+
+        let container = document.createElement('div');
+        container.classList.add('container')
+
+        body.appendChild(container);
+
+        let urlParams = new URLSearchParams(window.location.search);
+        let param = urlParams.get('id');
+
+        fetch(url = 'https://www.breakingbadapi.com/api/characters/' + param, data = {
+            method: 'GET',
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let flexContainer = document.createElement('div');
+                flexContainer.classList.add('flex');
+                container.appendChild(flexContainer);
+
+                for (let person of data) {
+                    let Card = document.createElement('div');
+                    Card.classList.add('cardPerson');
+                    flexContainer.appendChild(Card);
+
+                    let cardImage = document.createElement('div');
+                    Card.appendChild(cardImage);
+
+                    let image = document.createElement('img');
+                    cardImage.appendChild(image);
+                    image.classList.add('imagePerson');
+                    image.setAttribute('src', person.img);
+
+                    let name = document.createElement('div');
+                    name.classList.add('innerCardStyle');
+                    name.textContent = "Name: " + person.name;
+                    Card.appendChild(name);
+
+                    let age = document.createElement('div');
+                    age.classList.add('innerCardStyle');
+                    let birthday = new Date(person.birthday).getFullYear();
+                    if (birthday) {
+                        let today = new Date().getFullYear();
+                        let ageValue = today - birthday;
+                        age.innerText = "Age: " + ageValue;
+                    } else {
+                        let ageValue = birthday ? birthday : "Birthdate is not filled";
+                        age.innerText = "Age: " + ageValue;
+                    }
+                    Card.appendChild(age);
+
+                    let category = document.createElement('div');
+                    category.classList.add('innerCardStyle');
+                    category.textContent = "Category: " + person.category;
+                    Card.appendChild(category);
+
+                    let nickname = document.createElement('div');
+                    nickname.classList.add('innerCardStyle');
+                    nickname.textContent = "Nickname: " + person.nickname;
+                    Card.appendChild(nickname);
+
+                    let occupation = document.createElement('div');
+                    occupation.classList.add('innerCardStyle');
+                    occupation.textContent = "Occupation: " + person.occupation.join(', ');
+                    Card.appendChild(occupation);
+
+                    let portrayed = document.createElement('div');
+                    portrayed.classList.add('innerCardStyle');
+                    portrayed.textContent = "Portrayed: " + person.portrayed;
+                    Card.appendChild(portrayed);
+
+                    let status = document.createElement('div');
+                    status.classList.add('innerCardStyle');
+                    status.textContent = "Status: " + person.status;
+                    Card.appendChild(status);
+                }
+                console.log(data);
+
+            });
+    });
+
+</script>
+</body>
+</html>
