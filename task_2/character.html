@@ -86,9 +86,28 @@
                     status.classList.add('innerCardStyle');
                     status.textContent = "Status: " + person.status;
                     card.appendChild(status);
+
+                    fetch(url = 'https://www.breakingbadapi.com/api/quote?author=' + person.name.split(' ').join('+'),
+                        data = {
+                            method: 'GET',
+                        })
+                        .then((response2) => {
+                            return response2.json();
+                        })
+                        .then((data) => {
+                            let quote = document.createElement('div');
+                            quote.classList.add('innerCardStyle');
+                            quote.textContent = 'Quotes: \n';
+                            for (let quoteItem of data) {
+                                let quoteText = document.createElement('p');
+                                quoteText.textContent = '"' + quoteItem.quote + '"';
+                                quote.appendChild(quoteText);
+                            }
+                            card.appendChild(quote);
+                        });
+
                 }
                 console.log(data);
-
             });
     });
 
