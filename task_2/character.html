@@ -31,12 +31,13 @@
                 container.appendChild(flexContainer);
 
                 for (let person of data) {
-                    let Card = document.createElement('div');
-                    Card.classList.add('cardPerson');
-                    flexContainer.appendChild(Card);
+                    let card = document.createElement('div');
+                    card.classList.add('cardPerson');
+                    card.style.padding = '0 0 10px 0';
+                    flexContainer.appendChild(card);
 
                     let cardImage = document.createElement('div');
-                    Card.appendChild(cardImage);
+                    card.appendChild(cardImage);
 
                     let image = document.createElement('img');
                     cardImage.appendChild(image);
@@ -46,7 +47,7 @@
                     let name = document.createElement('div');
                     name.classList.add('innerCardStyle');
                     name.textContent = "Name: " + person.name;
-                    Card.appendChild(name);
+                    card.appendChild(name);
 
                     let age = document.createElement('div');
                     age.classList.add('innerCardStyle');
@@ -56,35 +57,35 @@
                         let ageValue = today - birthday;
                         age.innerText = "Age: " + ageValue;
                     } else {
-                        let ageValue = birthday ? birthday : "Birthdate is not filled";
+                        let ageValue = birthday ? birthday : "Birthdate is not defined";
                         age.innerText = "Age: " + ageValue;
                     }
-                    Card.appendChild(age);
+                    card.appendChild(age);
 
                     let category = document.createElement('div');
                     category.classList.add('innerCardStyle');
                     category.textContent = "Category: " + person.category;
-                    Card.appendChild(category);
+                    card.appendChild(category);
 
                     let nickname = document.createElement('div');
                     nickname.classList.add('innerCardStyle');
                     nickname.textContent = "Nickname: " + person.nickname;
-                    Card.appendChild(nickname);
+                    card.appendChild(nickname);
 
                     let occupation = document.createElement('div');
                     occupation.classList.add('innerCardStyle');
                     occupation.textContent = "Occupation: " + person.occupation.join(', ');
-                    Card.appendChild(occupation);
+                    card.appendChild(occupation);
 
                     let portrayed = document.createElement('div');
                     portrayed.classList.add('innerCardStyle');
                     portrayed.textContent = "Portrayed: " + person.portrayed;
-                    Card.appendChild(portrayed);
+                    card.appendChild(portrayed);
 
                     let status = document.createElement('div');
                     status.classList.add('innerCardStyle');
                     status.textContent = "Status: " + person.status;
-                    Card.appendChild(status);
+                    card.appendChild(status);
                 }
                 console.log(data);
 
